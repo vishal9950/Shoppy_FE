@@ -13,6 +13,7 @@ class App extends React.Component {
       cartItems: 0,
       items: [],
       page: 'home',
+      allOrders: [],
     };
     this.getInventory();
   }
@@ -26,17 +27,23 @@ class App extends React.Component {
   }
 
   showAllOrdersWithState = () => {
-    this.setState({
-      page: 'allOrders',
+    axios.get('/orders').then((allOrders) => {
+      this.setState({
+        allOrders: allOrders.data,
+        page: 'allOrders',
+      });
     });
   }
 
   showAllOrders = () => {
-    this.setState({
-      ...this.state,
-      cartItems: 0,
-      items: [],
-      page: 'allOrders',
+    axios.get('/orders').then((allOrders) => {
+      this.setState({
+        ...this.state,
+        cartItems: 0,
+        items: [],
+        page: 'allOrders',
+        allOrders: allOrders.data,
+      });
     });
   }
 
@@ -125,6 +132,7 @@ class App extends React.Component {
           cartItems={this.state.cartItems}
           items={this.state.items}
           onChangePage={() => { this.showAllOrders(); }}
+          allOrders={this.state.allOrders}
         />
       </div>
     );

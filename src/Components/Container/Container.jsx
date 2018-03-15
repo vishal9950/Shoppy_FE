@@ -9,6 +9,7 @@ class Container extends React.Component {
     super(props);
     this.state = {
       text: 'Your Basket',
+    //   allOrders: [],
     };
     Container.propTypes = {
       inventory: PropTypes.array.isRequired,
@@ -17,6 +18,7 @@ class Container extends React.Component {
       cartItems: PropTypes.number.isRequired,
       items: PropTypes.array.isRequired,
       onChangePage: PropTypes.func.isRequired,
+      allOrders: PropTypes.func.isRequired,
     };
   }
 
@@ -163,11 +165,109 @@ class Container extends React.Component {
       );
     }
 
-    return (
-      <div>
+    const total = [];
+    const insideRows = [];
+    insideRows.push(<div className="Items_Header">
+            <div>ITEM DESCRIPTION</div>
+            <div>UNIT PRICE</div>
+            <div>QUANTITY</div>
+            <div>SUB TOTAL</div>
+                    </div>);
+    for (let i = 0; i < this.props.allOrders.length; i += 1) {
+      let tot = 0;
+      //   const inRow = [];
+      for (let j = 0; j < this.props.allOrders[i].length; j += 1) {
+        let k;
+        for (k = 0; k < this.props.inventory.length; k += 1) {
+          if (this.props.inventory[k].item_id === this.props.allOrders[i][j].item_id) {
+            tot += this.props.inventory[k].cost;
+          }
+        //     }
+        //   }
+        }
+      }
+      total.push(tot);
+    }
+
+    const { allOrders, inventory } = this.props;
+    const inRow = [];
+    for (let k = 0; k < allOrders.length; k += 1) {
+      const tempItems = allOrders[k];
+      for (let i = 0; i < tempItems.length; i += 1) {
+        for (let j = 0; j < inventory.length; j += 1) {
+          if (tempItems[i].item_id === inventory[j].item_id) {
+            tempItems[i].category = inventory[j].category;
+            tempItems[i].cost = inventory[j].cost;
+            tempItems[i].brand = inventory[j].brand;
+            tempItems[i].title = inventory[j].title;
+            break;
+          }
+        }
+      }
+      const categorizedItems = tempItems.reduce((accumulator, currentValue) => {
+        const acc = accumulator;
+        acc[currentValue.category] = acc[currentValue.category] || [];
+        acc[currentValue.category].push(currentValue);
+        return acc;
+      }, []);
+      console.log(categorizedItems);
+      const categories = Object.keys(categorizedItems);
+      const itemRows = [];
+      for (let i = 0; i < categories.length; i += 1) {
+        console.log(categories[i]);
+        itemRows.push(<div className="Container-ItemCategory">
+          {categories[i]}
+                      </div>);
+        const item = categorizedItems[categories[i]];
+        for (let j = 0; j < item.length; j += 1) {
+          itemRows.push(<div className="Container-ItemDetails">
+            <div>
+              <div>{item[j].brand}</div>
+              <div>{item[j].title}</div>
+            </div>
+            <div>
+                Rs. {item[j].cost}
+            </div>
+            <div>
+              {item[j].quantity}
+            </div>
+            <div>
+              {item[j].cost * item[j].quantity}
+            </div>
+                        </div>);
+        }
+      // for(let j = 0;j<categorizedItems[i][j])
+      }
+      inRow.push(itemRows);
+      console.log(itemRows);
+    }
+    const allOrderRows = [];
+    allOrderRows.push(<div className="">Past Orders ({this.props.allOrders.length})</div>);
+    for (let i = 0; i < this.props.allOrders.length; i += 1) {
+      allOrderRows.push(<div>
+          <div className="Order-Head">
+                <div>ORDER ID</div>
+                <div>ITEMS</div>
+                <div>DATE</div>
+                <div>AMOUNT</div>
+          </div>
+          <div className="Order-Details">
+              <div>Order ID: {this.props.allOrders[i][0].order_id}</div>
+              <div>{this.props.allOrders.length} items</div>
+              <div>{this.props.allOrders[i][0].createdAt}</div>
+              <div>{total[i]}</div>
+              <div>
+                    {inRow[i]}
+              </div>
+            <div>Total {total[i]}</div>
+          </div>
+
+                        </div>);
+    }
+    return (<div>
           <Title text="All Orders" />
-      </div>
-    );
+            {allOrderRows}
+            </div>);
   }
 }
 
