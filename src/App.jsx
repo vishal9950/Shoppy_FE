@@ -11,6 +11,7 @@ class App extends React.Component {
     this.state = {
       inventory: [],
       cartItems: 0,
+      items: [],
     };
     this.getInventory();
   }
@@ -23,16 +24,44 @@ class App extends React.Component {
     });
   }
 
-  updateCart = (operator) => {
+  updateCart = (operator, obj) => {
+    console.log('obj: ', obj);
+    const { items } = this.state;
+    const temp = items;
+    if (items.length === 0) {
+      console.log('length: ', 0);
+      temp.push(obj);
+    } else {
+      let flag = 1;
+      for (let i = 0; i < items.length; i += 1) {
+        if (items[i].item_id === obj.item_id) {
+          console.log('id found at ::: ', i);
+          temp[i].quantity = obj.quantity;
+          console.log(temp);
+          flag = 0;
+          break;
+        }
+      }
+      if (flag === 1) {
+        temp.push(obj);
+      }
+    }
+    const newTemp = [];
+    for (let i = 0; i < temp.length; i += 1) {
+      if (temp[i].quantity !== 0) {
+        newTemp.push(temp[i]);
+      }
+    }
+    console.log('temp:::::', temp);
     if (operator === 'add') {
       this.setState({
-        ...this.state,
         cartItems: this.state.cartItems + 1,
+        items: newTemp,
       });
     } else {
       this.setState({
-        ...this.state,
         cartItems: this.state.cartItems - 1,
+        items: newTemp,
       });
     }
   }
@@ -43,7 +72,7 @@ class App extends React.Component {
         <Header cartItems={this.state.cartItems} />
         <Container
           inventory={this.state.inventory}
-          onChange={(operator) => { this.updateCart(operator); }}
+          onChange={(operator, obj) => { this.updateCart(operator, obj); }}
         />
       </div>
     );

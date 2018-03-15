@@ -28,11 +28,11 @@ class Container extends React.Component {
     // console.log(categories);
     const cardRows = [];
     for (let i = 0; i < categories.length; i += 1) {
-      console.log(categorizedItems[categories[i]]);
+    //   console.log(categorizedItems[categories[i]]);
       cardRows.push(<CategoryContainer
         key={i}
         item={categorizedItems[categories[i]]}
-        onChange={(operator) => { this.props.onChange(operator); }}
+        onChange={(operator, obj) => { console.log('Container:::', obj); this.props.onChange(operator, obj); }}
       />);
     //   for (let j = 0; j < categorizedItems[categories[i]].length; j += 1) {
     //     console.log(

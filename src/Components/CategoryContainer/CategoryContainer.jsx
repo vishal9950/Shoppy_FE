@@ -21,7 +21,7 @@ class CategoryContainer extends React.Component {
       cardRows.push(<ItemCard
         key={item[i].item_id}
         item={item[i]}
-        onChange={(operator) => { this.props.onChange(operator); }}
+        onChange={(operator, obj) => { console.log('catCont:::', obj); this.props.onChange(operator, obj); }}
       />);
     }
     return (

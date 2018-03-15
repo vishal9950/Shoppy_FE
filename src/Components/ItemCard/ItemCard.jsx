@@ -19,14 +19,18 @@ class ItemCard extends React.Component {
   }
 
   decreaseQty = () => {
-    this.props.onChange('sub');
+    const send = { item_id: this.props.item.item_id, quantity: this.state.itemQty - 1 };
+    console.log('send: ', send);
+    this.props.onChange('sub', send);
     this.setState({
       itemQty: this.state.itemQty - 1,
     });
   }
 
   increaseQty = () => {
-    this.props.onChange('add');
+    const send = { item_id: this.props.item.item_id, quantity: this.state.itemQty + 1 };
+    console.log('send: ', send);
+    this.props.onChange('add', send);
     this.setState({
       itemQty: this.state.itemQty + 1,
     });
