@@ -25,6 +25,12 @@ class App extends React.Component {
     });
   }
 
+  showAllOrdersWithState = () => {
+    this.setState({
+      page: 'allOrders',
+    });
+  }
+
   showAllOrders = () => {
     this.setState({
       ...this.state,
@@ -107,7 +113,11 @@ class App extends React.Component {
   render() {
     return (
       <div className="App">
-        <Header cartItems={this.state.cartItems} onChange={() => { this.showCheckout(); }} />
+        <Header
+          cartItems={this.state.cartItems}
+          onChange={() => { this.showCheckout(); }}
+          onChangePage={() => { this.showAllOrdersWithState(); }}
+        />
         <Container
           inventory={this.state.inventory}
           onChange={(operator, obj) => { this.updateCart(operator, obj); }}

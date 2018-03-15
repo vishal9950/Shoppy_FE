@@ -10,6 +10,7 @@ class Header extends React.Component {
     Header.propTypes = {
       cartItems: PropTypes.number.isRequired,
       onChange: PropTypes.func.isRequired,
+      onChangePage: PropTypes.func.isRequired,
     };
   }
 
@@ -22,7 +23,7 @@ class Header extends React.Component {
       <div className="Header-head">
         <div>icon</div>
         <div>E-Shopper</div>
-        <div><button>All Orders</button></div>
+        <div><button onClick={() => { this.props.onChangePage(); }}>All Orders</button></div>
         <div>
           <button
             onClick={this.props.cartItems === 0 ?

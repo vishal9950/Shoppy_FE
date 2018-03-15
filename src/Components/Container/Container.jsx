@@ -164,7 +164,9 @@ class Container extends React.Component {
     }
 
     return (
-      <div>All Orders</div>
+      <div>
+          <Title text="All Orders" />
+      </div>
     );
   }
 }
