@@ -12,6 +12,7 @@ class App extends React.Component {
       inventory: [],
       cartItems: 0,
       items: [],
+      page: 'home',
     };
     this.getInventory();
   }
@@ -24,55 +25,96 @@ class App extends React.Component {
     });
   }
 
+  showAllOrders = () => {
+    this.setState({
+      ...this.state,
+      cartItems: 0,
+      items: [],
+      page: 'allOrders',
+    });
+  }
+
+  showCheckout = () => {
+    this.setState({
+      ...this.state,
+      page: 'checkout',
+    });
+  }
+
   updateCart = (operator, obj) => {
-    console.log('obj: ', obj);
     const { items } = this.state;
     const temp = items;
-    if (items.length === 0) {
-      console.log('length: ', 0);
-      temp.push(obj);
-    } else {
-      let flag = 1;
+    if (operator === '') {
       for (let i = 0; i < items.length; i += 1) {
         if (items[i].item_id === obj.item_id) {
-          console.log('id found at ::: ', i);
-          temp[i].quantity = obj.quantity;
-          console.log(temp);
-          flag = 0;
+          // console.log('id found at ::: ', i);
+          temp[i].quantity = 0;
+          // console.log(temp);
           break;
         }
       }
-      if (flag === 1) {
-        temp.push(obj);
+      const newTemp = [];
+      for (let i = 0; i < temp.length; i += 1) {
+        if (temp[i].quantity !== 0) {
+          newTemp.push(temp[i]);
+        }
       }
-    }
-    const newTemp = [];
-    for (let i = 0; i < temp.length; i += 1) {
-      if (temp[i].quantity !== 0) {
-        newTemp.push(temp[i]);
-      }
-    }
-    console.log('temp:::::', temp);
-    if (operator === 'add') {
       this.setState({
-        cartItems: this.state.cartItems + 1,
+        cartItems: this.state.cartItems - obj.quantity,
         items: newTemp,
       });
     } else {
-      this.setState({
-        cartItems: this.state.cartItems - 1,
-        items: newTemp,
-      });
+    // console.log('obj: ', obj);
+      if (items.length === 0) {
+      // console.log('length: ', 0);
+        temp.push(obj);
+      } else {
+        let flag = 1;
+        for (let i = 0; i < items.length; i += 1) {
+          if (items[i].item_id === obj.item_id) {
+          // console.log('id found at ::: ', i);
+            temp[i].quantity = obj.quantity;
+            // console.log(temp);
+            flag = 0;
+            break;
+          }
+        }
+        if (flag === 1) {
+          temp.push(obj);
+        }
+      }
+      const newTemp = [];
+      for (let i = 0; i < temp.length; i += 1) {
+        if (temp[i].quantity !== 0) {
+          newTemp.push(temp[i]);
+        }
+      }
+      // console.log('temp:::::', temp);
+      if (operator === 'add') {
+        this.setState({
+          cartItems: this.state.cartItems + 1,
+          items: newTemp,
+        });
+      } else if (operator === 'sub') {
+        this.setState({
+          cartItems: this.state.cartItems - 1,
+          items: newTemp,
+        });
+      }
     }
   }
 
   render() {
     return (
       <div className="App">
-        <Header cartItems={this.state.cartItems} />
+        <Header cartItems={this.state.cartItems} onChange={() => { this.showCheckout(); }} />
         <Container
           inventory={this.state.inventory}
           onChange={(operator, obj) => { this.updateCart(operator, obj); }}
+          page={this.state.page}
+          cartItems={this.state.cartItems}
+          items={this.state.items}
+          onChangePage={() => { this.showAllOrders(); }}
         />
       </div>
     );

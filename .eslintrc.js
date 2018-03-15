@@ -6,6 +6,7 @@ module.exports = {
     },
     "rules": {
         "no-console": 0,
-        "react/forbid-prop-types": 0
+        "react/forbid-prop-types": 0,
+        "react/jsx-indent": 0
     }
 };

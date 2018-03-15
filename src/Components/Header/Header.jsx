@@ -9,7 +9,12 @@ class Header extends React.Component {
     };
     Header.propTypes = {
       cartItems: PropTypes.number.isRequired,
+      onChange: PropTypes.func.isRequired,
     };
+  }
+
+  doNothing = () => {
+
   }
 
   render() {
@@ -19,7 +24,11 @@ class Header extends React.Component {
         <div>E-Shopper</div>
         <div><button>All Orders</button></div>
         <div>
-          <button>
+          <button
+            onClick={this.props.cartItems === 0 ?
+           () => { this.doNothing(); } :
+            () => { this.props.onChange(); }}
+          >
             <div className="Header-Cart">
               <div>icon</div>
               <div>
