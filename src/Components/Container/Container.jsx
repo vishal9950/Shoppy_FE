@@ -1,9 +1,19 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import axios from 'axios';
+import './Container.css';
 import CategoryContainer from '../CategoryContainer/CategoryContainer';
 import Title from '../Title/Title';
 
+const compare = (a, b) => {
+  if (a.availableqty < b.availableqty) {
+    return 1;
+  }
+  if (a.availableqty > b.availableqty) {
+    return -1;
+  }
+  return 0;
+};
 class Container extends React.Component {
   constructor(props) {
     super(props);
@@ -63,10 +73,12 @@ class Container extends React.Component {
       // console.log(categorizedItems);
       // console.log(categorizedItems.Dairy);
       const categories = Object.keys(categorizedItems);
-      // console.log(categories);
+
+      console.log('categories::::', categories);
       const cardRows = [];
       for (let i = 0; i < categories.length; i += 1) {
-        //   console.log(categorizedItems[categories[i]]);
+        categorizedItems[categories[i]].sort(compare);
+        console.log('categorizedItems[categories[i]]::::', categorizedItems[categories[i]]);
         cardRows.push(<CategoryContainer
           key={i}
           item={categorizedItems[categories[i]]}
@@ -80,7 +92,7 @@ class Container extends React.Component {
         //   }
       }
       return (
-        <div>{cardRows}</div>
+        <div className="ContainerHome-Main">{cardRows}</div>
       );
     } else if (this.props.page === 'checkout') {
       let itemsCart;
@@ -120,45 +132,55 @@ class Container extends React.Component {
         const item = categorizedItems[categories[i]];
         for (let j = 0; j < item.length; j += 1) {
           itemRows.push(<div className="Container-ItemDetails">
-            <div>
-              <div>{item[j].brand}</div>
-              <div>{item[j].title}</div>
+            <div className="Container-CatName">
+              <div className="Container-CatName"><span className="Container-Brand">{item[j].brand.toUpperCase()}</span></div>
+              <div className="Container-CatName"><span className="Container-Title">{item[j].title}</span></div>
             </div>
-            <div>
+            <div className="Container-CatName" />
+            <div className="Container-CatName" />
+            <div className="Container-CatName">
                 Rs. {item[j].cost}
             </div>
-            <div>
+            <div className="Container-CatName">
               {item[j].quantity}
             </div>
-            <div>
-              {item[j].cost * item[j].quantity}
+            <div className="Container-CatName">
+              Rs. {item[j].cost * item[j].quantity}
             </div>
-            <div>
+            <div className="Container-CatName">
               <button
                 onClick={() => { this.deleteItem(item[j].item_id, item[j].quantity); }}
               >x
               </button>
             </div>
-            <div />
                         </div>);
           total += item[j].cost * item[j].quantity;
         }
         // for(let j = 0;j<categorizedItems[i][j])
       }
       return (
-        <div>
+        <div className="ContainerCheckout-Main">
           <Title text={`${this.state.text} (${itemsCart} items)`} />
+          <div className="Checkout-Head">
+            <div className="Container-CatName">ITEM DESCRIPTION</div>
+            <div className="Container-CatName" />
+            <div className="Container-CatName" />
+            <div className="Container-CatName">UNIT PRICE</div>
+            <div className="Container-CatName">QUANTITY</div>
+            <div className="Container-CatName">SUBTOTAL</div>
+            <div className="Container-CatName" />
+          </div>
           <div>{itemRows}
           </div>
           <div className="Container-CheckoutBox">
-            <div>Total Rs. {total}</div>
+            <div className="ContainerTotal"><div className="ContainerTotalLeft">TOTAL</div><div className="ContainerTotalRight"> Rs. {total}</div></div>
             <hr />
             <button
               className="Container-Checkout-btn"
               onClick={total === 0 ?
               () => { this.doNothing(); } :
               () => { this.checkout(); }}
-            >Checkout
+            >CHECKOUT
             </button>
           </div>
         </div>

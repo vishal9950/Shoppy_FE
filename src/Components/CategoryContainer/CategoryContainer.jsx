@@ -1,6 +1,7 @@
 import React from 'react';
 import { PropTypes } from 'prop-types';
 import ItemCard from '../ItemCard/ItemCard';
+import './CategoryContainer.css';
 
 class CategoryContainer extends React.Component {
   constructor(props) {
@@ -22,14 +23,15 @@ class CategoryContainer extends React.Component {
         key={item[i].item_id}
         item={item[i]}
         onChange={(operator, obj) => { console.log('catCont:::', obj); this.props.onChange(operator, obj); }}
+        className="CategoryContainer-ItemCard"
       />);
     }
     return (
       <div className="CategoryContainer-Outer">
         <div className="CategoryContainer-Category">
-          {this.props.item[0].category}
+        <div className="CategoryContainer-Cat">{this.props.item[0].category}</div>
+        <div className="CategoryContainer-CardRows">{cardRows}</div>
         </div>
-        {cardRows}
       </div>
     );
   }

@@ -1,0 +1,92 @@
+.ContainerCheckout-Main {
+    position: relative;
+    top: 70px;
+}
+
+.Checkout-Head {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-left: 20px;
+    margin-right: 20px;
+    color: white;
+    background-color: black;
+    font-size: 10px;
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+    text-align: center;
+    padding: 15px;
+}
+
+.Container-CatName {
+    width: 100px;
+    font-size: 10px;
+}
+
+.Container-Brand {
+    color: lightgray;
+}
+
+.Container-Title {
+    font-size: 15px;
+}
+
+.Container-ItemCategory {
+    background-color: lightgray;
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 5px;
+    font-size: 12px;
+}
+
+.Container-ItemDetails {
+    margin-left: 20px;
+    margin-right: 20px;
+    padding: 15px;
+    font-size: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.Container-CheckoutBox {
+    position: absolute;
+    right: 20px;
+    height: 100px;
+    width: 250px;
+    border: 1px solid black;
+    padding-top: 50px;
+    padding-bottom: 50px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: white;
+    background: linear-gradient( #ffffff, rgb(228, 226, 225));
+}
+
+.ContainerTotal {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    text-align: center;
+    font-size: 17px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.ContainerTotalLeft {
+    width: 50%;
+}
+
+.ContainerTotalRight {
+    width: 50%;
+}
+
+.Container-Checkout-btn {
+    height: 30px;
+    width: 100px;
+    border: none;
+    border-radius: 3px;
+    background-color: rgb(223, 164, 55);
+    box-shadow: 0px 1px 2px 0px lightgray;
+    position: relative;
+    left: 120px;
+}

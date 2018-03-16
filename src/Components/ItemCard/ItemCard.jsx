@@ -37,35 +37,50 @@ class ItemCard extends React.Component {
   }
 
   render() {
-    return (
-      <div className="ItemCard-Outer">
-        <img className="ItemCard-Image" alt={this.props.item.title} src={this.props.item.imageurl} />
-        <div className="ItemCard-Item">
-          <div>{this.props.item.brand}</div>
-          <div>{this.props.item.title}</div>
-        </div>
-        <div className="ItemCard-Desc">
-          {this.props.item.description}
-        </div>
+    let box;
+    if (this.props.item.availableqty === 0) {
+      box = (
+      <div className="ItemCard-SoldOut">SOLD OUT</div>
+      );
+    } else {
+      box = (
         <div className="ItemCard-AddBox">
-          <div>MRP {this.props.item.cost}/-</div>
-          <div>
-            <button
+          <div className="ItemCard-Cost">MRP {this.props.item.cost}/-</div>
+          <div className={this.state.itemQty === 0 ? 'Adder' : 'Adder-Color'}>
+            <div className="AdderBtn"><button
+              className="AdderBtn"
               onClick={this.state.itemQty === 0 ?
               () => { this.doNothing(); } :
               () => { this.decreaseQty(); }}
             >-
-            </button>
+                                      </button>
+            </div>
             <div className="ItemCard-Adder">
               {this.state.itemQty} in Basket
             </div>
-            <button
+            <div className="AdderBtnRt"><button
+              className="AdderBtnRt"
               onClick={this.state.itemQty === this.props.item.availableqty ?
                () => { this.doNothing(); } :
                 () => { this.increaseQty(); }}
             >+
-            </button>
+                                        </button>
+            </div>
           </div>
+        </div>
+      );
+    }
+
+    return (
+      <div className={this.props.item.availableqty === 0 ? 'ItemCard-Outer-Gray' : 'ItemCard-Outer'}>
+        <div className="ItemCard-ImageCenter"><img className="ItemCard-Image" alt={this.props.item.title} src={this.props.item.imageurl} /></div>
+        <div className="ItemCard-Item">
+          <div className="ItemCard-ItemBrand">{this.props.item.brand.toUpperCase()}</div>
+          <div className="ItemCard-ItemTitle">{this.props.item.title}</div>
+        <div className="ItemCard-Desc">
+          {this.props.item.description}
+        </div>
+      {box}
         </div>
       </div>
     );

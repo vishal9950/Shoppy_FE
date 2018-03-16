@@ -1,4 +1,107 @@
 .ItemCard-Image {
-    width: 100px;
+    width: 90%;
     height: 100px;
+    padding: 5px;
+}
+
+.ItemCard-Outer {
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    width: 140px;
+    margin-right: 20px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+}
+
+.ItemCard-Outer-Gray {
+    border: 1px solid lightgray;
+    border-radius: 3px;
+    width: 140px;
+    margin-right: 20px;
+    margin-left: 10px;
+    margin-bottom: 20px;
+    background-color: lightgray;
+}
+
+.ItemCard-ImageCenter {
+    text-align: center;
+}
+
+.ItemCard-SoldOut{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 10px;
+    color: red;
+}
+
+.ItemCard-Item {
+    width: 90%;
+    padding: 5px;
+}
+
+.ItemCard-ItemBrand {
+    color: lightgray;
+    font-size: 10px;
+}
+
+.ItemCard-ItemTitle {
+    font-size: 15px;
+    font-weight: bold;
+    margin-bottom: 20px;
+}
+
+.ItemCard-Desc {
+    font-size: 10px;
+    margin-bottom: 10px;
+}
+
+.ItemCard-AddBox {
+    background-color: lightgray;
+    padding: 10px;
+}
+
+.ItemCard-Cost{
+    font-size: 10px;
+    font-weight: bold;
+    margin-bottom: 5px;
+}
+
+.Adder {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgb(158, 154, 154);
+    border-radius: 5px;
+    align-content: center;
+    vertical-align: middle;
+}
+
+.Adder-Color {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    background-color: rgb(252, 206, 0);
+    border-radius: 5px;
+    align-content: center;
+    vertical-align: middle;
+}
+
+.ItemCard-Adder {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    font-size: 10px;
+}
+
+.AdderBtn {
+    height: 25px;
+    border-top-left-radius: 5px;
+    border-bottom-left-radius: 5px;
+}
+
+.AdderBtnRt {
+    height: 25px;
+    border-top-right-radius: 5px;
+    border-bottom-right-radius: 5px;
 }
