@@ -46,8 +46,9 @@
 }
 
 .ItemCard-ItemTitle {
-    font-size: 15px;
+    font-size: 12px;
     font-weight: bold;
+    height: 30px;
     margin-bottom: 20px;
 }
 

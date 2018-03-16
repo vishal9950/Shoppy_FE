@@ -149,6 +149,7 @@ class Container extends React.Component {
             </div>
             <div className="Container-CatName">
               <button
+                className="DeleteItem"
                 onClick={() => { this.deleteItem(item[j].item_id, item[j].quantity); }}
               >x
               </button>
@@ -273,25 +274,24 @@ class Container extends React.Component {
           <div className="Container-CatName">UNIT PRICE</div>
           <div className="Container-CatName">QUANTITY</div>
           <div className="Container-CatName">SUBTOTAL</div>
-          <div className="Container-CatName" />
       </div>
     );
     const allOrderRows = [];
-    allOrderRows.push(<div className="">Past Orders ({this.props.allOrders.length})</div>);
+    allOrderRows.push(<div className="OrderPast">Past Orders ({this.props.allOrders.length})</div>);
     for (let i = 0; i < this.props.allOrders.length; i += 1) {
-      allOrderRows.push(<div>
+      allOrderRows.push(<div className="Orders_Main">
           <div className="Order-Head">
-                <div>ORDER ID</div>
-                <div>ITEMS</div>
-                <div>DATE</div>
-                <div>AMOUNT</div>
+                <div className="MainOrder-Size">ORDER ID</div>
+                <div className="MainOrder-Size">ITEMS</div>
+                <div className="MainOrder-Size">DATE</div>
+                <div className="MainOrder-Size">AMOUNT</div>
           </div>
           <div>
             <div className="OrderDetails">
-              <div>Order ID: {this.props.allOrders[i][0].order_id}</div>
-              <div>{this.props.allOrders.length} items</div>
-              <div>{this.props.allOrders[i][0].createdAt}</div>
-              <div>{total[i]}</div>
+              <div className="MainOrder-Size">Order ID: {this.props.allOrders[i][0].order_id}</div>
+              <div className="MainOrder-Size">{this.props.allOrders.length} items</div>
+              <div className="MainOrder-Size">{this.props.allOrders[i][0].createdAt}</div>
+              <div className="MainOrder-Size">Rs. {total[i]}</div>
             </div>
               <div>
                 {itemsHead}
