@@ -243,17 +243,19 @@ class Container extends React.Component {
         const item = categorizedItems[categories[i]];
         for (let j = 0; j < item.length; j += 1) {
           itemRows.push(<div className="Container-ItemDetails">
-            <div>
-              <div>{item[j].brand}</div>
-              <div>{item[j].title}</div>
+            <div className="Container-CatName">
+              <div className="Container-CatName"><span className="Container-Brand">{item[j].brand.toUpperCase()}</span></div>
+              <div className="Container-CatName"><span className="Container-Title">{item[j].title}</span></div>
             </div>
-            <div>
+            <div className="Container-CatName" />
+            <div className="Container-CatName" />
+            <div className="Container-CatName">
                 Rs. {item[j].cost}
             </div>
-            <div>
+            <div className="Container-CatName">
               {item[j].quantity}
             </div>
-            <div>
+            <div className="Container-CatName">
               {item[j].cost * item[j].quantity}
             </div>
                         </div>);
@@ -263,6 +265,17 @@ class Container extends React.Component {
       inRow.push(itemRows);
       console.log(itemRows);
     }
+    const itemsHead = (
+      <div className="Checkout-Head-Blue">
+          <div className="Container-CatName">ITEM DESCRIPTION</div>
+          <div className="Container-CatName" />
+          <div className="Container-CatName" />
+          <div className="Container-CatName">UNIT PRICE</div>
+          <div className="Container-CatName">QUANTITY</div>
+          <div className="Container-CatName">SUBTOTAL</div>
+          <div className="Container-CatName" />
+      </div>
+    );
     const allOrderRows = [];
     allOrderRows.push(<div className="">Past Orders ({this.props.allOrders.length})</div>);
     for (let i = 0; i < this.props.allOrders.length; i += 1) {
@@ -273,20 +286,23 @@ class Container extends React.Component {
                 <div>DATE</div>
                 <div>AMOUNT</div>
           </div>
-          <div className="Order-Details">
+          <div>
+            <div className="OrderDetails">
               <div>Order ID: {this.props.allOrders[i][0].order_id}</div>
               <div>{this.props.allOrders.length} items</div>
               <div>{this.props.allOrders[i][0].createdAt}</div>
               <div>{total[i]}</div>
+            </div>
               <div>
+                {itemsHead}
                     {inRow[i]}
               </div>
-            <div>Total {total[i]}</div>
+            <div className="OrderDetailsTotal"><div /><div /><div>Total</div><div> Rs.{total[i]}</div></div>
           </div>
 
                         </div>);
     }
-    return (<div>
+    return (<div className="ContainerCheckout-Main">
           <Title text="All Orders" />
             {allOrderRows}
             </div>);
