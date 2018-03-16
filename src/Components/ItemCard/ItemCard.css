@@ -15,6 +15,7 @@
 
 .ItemCard-Outer-Gray {
     border: 1px solid lightgray;
+    opacity: 0.65;
     border-radius: 3px;
     width: 140px;
     margin-right: 20px;

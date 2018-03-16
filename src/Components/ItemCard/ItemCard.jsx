@@ -40,7 +40,10 @@ class ItemCard extends React.Component {
     let box;
     if (this.props.item.availableqty === 0) {
       box = (
+    <div>
+          <div className="ItemCard-Cost">MRP {this.props.item.cost}/-</div>
       <div className="ItemCard-SoldOut">SOLD OUT</div>
+    </div>
       );
     } else {
       box = (
