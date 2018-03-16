@@ -7,7 +7,7 @@
 .ItemCard-Outer {
     border: 1px solid lightgray;
     border-radius: 3px;
-    width: 140px;
+    width: 160px;
     margin-right: 20px;
     margin-left: 10px;
     margin-bottom: 20px;
@@ -17,11 +17,11 @@
     border: 1px solid lightgray;
     opacity: 0.65;
     border-radius: 3px;
-    width: 140px;
+    width: 160px;
     margin-right: 20px;
     margin-left: 10px;
     margin-bottom: 20px;
-    background-color: lightgray;
+    background-color: #e2e2e2ef;
 }
 
 .ItemCard-ImageCenter {
@@ -61,6 +61,7 @@
 .ItemCard-AddBox {
     background-color: lightgray;
     padding: 10px;
+    height: 62px;
 }
 
 .ItemCard-Cost{
